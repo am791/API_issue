@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image API Caller</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <input type="file" id="fileInput" accept="image/*">
+        <button id="callApiBtn">Call API</button>
+        <div id="responseDisplay" class="response-display"></div>
+    </div>
+
+    <script>
+        let selectedFile;
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            selectedFile = event.target.files[0];
+            if (selectedFile) {
+                console.log('File selected:', selectedFile);
+            }
+        });
+
+        document.getElementById('callApiBtn').addEventListener('click', function() {
+            if (!selectedFile) {
+                alert('Please select a file first.');
+                return;
+            }
+            const responseDisplay = document.getElementById('responseDisplay');
+            responseDisplay.textContent = 'Loading...';
+            
+            const formData = new FormData();
+            formData.append("type", "auto");
+            formData.append("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo2LCJhcHAiOjU3LCJ0aW1lIjoxNzIzMDE2NTE2LjY0NzU2NjZ9._2nEZXD15me-FNxpGYOO1wc4i4vUmScQZlPP7tGpQM0");
+            formData.append("file", selectedFile);
+            
+
+                fetch('https://ocrmaas.enflame-tech.com/api/v1/apps/invoices/', {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: formData,
+                })
+                .then(response => {
+                    console.log('API response: ', response);
+                    const responseDetails = {
+                        body: response.body,
+                        bodyUsed: response.bodyUsed,
+                        headers: response.headers,
+                        ok: response.ok,
+                        redirected: response.redirected,
+                        status: response.status,
+                        statusText: response.statusText,
+                        type: response.type,
+                        url: response.url,
+                    };
+                    responseDisplay.textContent = JSON.stringify(responseDetails, null, 2);
+                })
+                .then(data => {
+                    console.log('API Response:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
