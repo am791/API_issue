@@ -1,4 +1,4 @@
-path: "/content/drive/MyDrive/OWN_OCR/OCR/dataset/segmentation/"
+path: "/home/enflame/OCR_IND/API_issue/datasets/segmentation/"
 train: "images/train"
 val: "images/val"
 nc: 1
