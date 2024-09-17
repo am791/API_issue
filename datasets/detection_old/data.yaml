@@ -1,0 +1,5 @@
+path: "/home/enflame/OCR_IND/API_issue/datasets/detection/"
+train: "images/train"
+val: "images/val"
+nc: 18
+names: ['client_address', 'client_name', 'client_taxID', 'invoice_date', 'invoice_number', 'item_grossValue', 'item_name', 'item_netPrice', 'item_netWorth', 'item_quantity', 'item_vat', 'seller_IBAN', 'seller_address', 'seller_name', 'seller_taxID', 'total_grossWorth', 'total_netWorth', 'total_vat']
